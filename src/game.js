@@ -14,10 +14,12 @@ export default class Game extends React.Component {
         ArrowLeft: { x: 0, y: -1},
         ArrowRight: { x: 0, y: 1},
       },
+      // Current position
       pos: {
         x: 0,
         y: 0,
       },
+      // 2D boolean array if each position has food or not
       hasFood: this.spreadFood(this.props.height)
     }
   }
@@ -53,8 +55,11 @@ export default class Game extends React.Component {
 
   handleKeypPress = (e) => {
     this.move(this.state.direction[e.key])
+    this.eatFood()
   }
 
+  // Moves the player in the given direction if the
+  // position is a valid one
   move = (dir) => {
     const newPos = {
       x: this.state.pos.x + dir.x,
@@ -66,6 +71,17 @@ export default class Game extends React.Component {
     this.setState({
       ...this.state,
       pos: newPos,
+    })
+  }
+
+  // Eat food at current position
+  eatFood = () => {
+    const pos = this.state.pos
+    const hasFood = this.state.hasFood.slice().map((row) => row.slice())
+    hasFood[pos.x][pos.y] = false
+    this.setState({
+      ...this.state,
+      hasFood: hasFood
     })
   }
 

@@ -4,10 +4,6 @@ import Square from './square'
 import './App.css'
 
 export default class Board extends React.Component {
-  renderSquare() {
-    return <Square />;
-  }
-
   render() {
     let board = Array(this.props.height)
     for (let i = 0; i < board.length; i++) {
@@ -17,6 +13,7 @@ export default class Board extends React.Component {
           <Square
             key={i * row.length + j}
             isCurPos={this.props.pos.x === i && this.props.pos.y === j}
+            hasFood={this.props.hasFood[i][j]}
           />)
       }
 

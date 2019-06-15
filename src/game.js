@@ -33,7 +33,6 @@ export default class Game extends React.Component {
       const pos = this.getRandomEmptyPos(hasFood)
       hasFood[pos.x][pos.y] = true
     }
-    console.log(hasFood)
     return hasFood
   }
 

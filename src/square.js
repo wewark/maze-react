@@ -7,7 +7,7 @@ export default function Square(props) {
   if (props.isCurPos) {
     content = <img src={ require('./img/mario.png')} alt='mario' className='icon' />
   } else if (props.hasFood) {
-    content = 'F'
+    content = <img src={ require('./img/mushroom.jpg')} alt='mario' className='icon' />
   }
   return (
     <button className="square">

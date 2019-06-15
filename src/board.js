@@ -5,24 +5,19 @@ import './App.css'
 
 export default class Board extends React.Component {
   render() {
-    let board = Array(this.props.height)
-    for (let i = 0; i < board.length; i++) {
-      let row = Array(this.props.width)
-      for (let j = 0; j < row.length; j++) {
-        row[j] = (
+    let board = Array(this.props.height).fill(null).map((_, i) => (<div
+      key={i}
+      className="board-row">
+      {
+        Array(this.props.width).fill(null).map((_, j) => (
           <Square
-            key={i * row.length + j}
+            key={i * this.props.width + j}
             isCurPos={this.props.pos.x === i && this.props.pos.y === j}
             hasFood={this.props.hasFood[i][j]}
-          />)
+          />
+        ))
       }
-
-      board[i] = (<div
-        key={i}
-        className="board-row">
-        {row}
-      </div>)
-    }
+    </div>))
 
     return (
       <div>

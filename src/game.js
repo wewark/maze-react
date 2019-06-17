@@ -1,11 +1,13 @@
 import React from 'react';
 
 import Board from './board'
+import { getRandomInt } from './helpers';
 
 export default class Game extends React.Component {
   constructor(props) {
     super(props)
-    document.onkeydown = this.handleKeypPress;
+    document.onkeydown = this.handleKeypPress
+    const hasFood = this.spreadFood(this.props.height)
     this.state = {
       // x and y changes for each direction
       direction: {
@@ -15,19 +17,12 @@ export default class Game extends React.Component {
         ArrowRight: { x: 0, y: 1},
       },
       // Current position
-      pos: {
-        x: 0,
-        y: 0,
-      },
+      pos: this.getRandomEmptyPos(hasFood),
       // 2D boolean array if each position has food or not
-      hasFood: this.spreadFood(this.props.height),
+      hasFood: hasFood,
       foodLeft: this.props.height,
       steps: 0,
     }
-  }
-
-  getRandomInt = (max) => {
-    return Math.floor(Math.random() * Math.floor(max));
   }
 
   // Returns food 2D array given the probability of food
@@ -43,13 +38,13 @@ export default class Game extends React.Component {
   // Returns coordinates of a random empty position in arr
   getRandomEmptyPos = (arr) => {
     let pos = {
-      x: this.getRandomInt(this.props.height),
-      y: this.getRandomInt(this.props.width),
+      x: getRandomInt(this.props.height),
+      y: getRandomInt(this.props.width),
     }
     while (arr[pos.x][pos.y]) {
       pos = {
-        x: this.getRandomInt(this.props.height),
-        y: this.getRandomInt(this.props.width),
+        x: getRandomInt(this.props.height),
+        y: getRandomInt(this.props.width),
       }
     }
     return pos

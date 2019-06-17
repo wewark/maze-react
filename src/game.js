@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 import Board from './board'
-import { getRandomInt } from './helpers';
+import { getRandomInt } from './helpers'
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -76,8 +76,10 @@ export default class Game extends React.Component {
   eatFood = () => {
     const pos = this.state.pos
     const hasFood = this.state.hasFood.slice().map((row) => row.slice())
-    if (!hasFood[pos.x][pos.y]) return;
-
+    if (!hasFood[pos.x][pos.y]) {
+      return
+    }
+    
     hasFood[pos.x][pos.y] = false
     this.setState({
       ...this.state,

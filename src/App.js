@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css';
+import './App.css'
 
 import Game from './game'
 
@@ -27,4 +27,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App

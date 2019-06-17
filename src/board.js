@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import Square from './square'
 import './App.css'
@@ -22,6 +22,6 @@ export default class Board extends React.Component {
     return (
       <div>
         {board}
-      </div>);
+      </div>)
   }
 }

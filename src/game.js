@@ -20,7 +20,9 @@ export default class Game extends React.Component {
         y: 0,
       },
       // 2D boolean array if each position has food or not
-      hasFood: this.spreadFood(this.props.height)
+      hasFood: this.spreadFood(this.props.height),
+      foodLeft: this.props.height,
+      steps: 0,
     }
   }
 
@@ -71,6 +73,7 @@ export default class Game extends React.Component {
     this.setState({
       ...this.state,
       pos: newPos,
+      steps: this.state.steps + (this.state.foodLeft === 0 ? 0 : 1),
     })
   }
 
@@ -78,13 +81,18 @@ export default class Game extends React.Component {
   eatFood = () => {
     const pos = this.state.pos
     const hasFood = this.state.hasFood.slice().map((row) => row.slice())
+    if (!hasFood[pos.x][pos.y]) return;
+
     hasFood[pos.x][pos.y] = false
     this.setState({
       ...this.state,
-      hasFood: hasFood
+      hasFood: hasFood,
+      foodLeft: this.state.foodLeft - 1
     })
   }
 
+  // Returns true if the given position is within
+  // the grid boundaries
   validPosition = (pos) => {
     return (
       pos.x >= 0 && pos.x < this.props.height &&
@@ -93,11 +101,21 @@ export default class Game extends React.Component {
 
   render() {
     return (
-      <Board
-        height={this.props.height}
-        width={this.props.width}
-        pos={this.state.pos}
-        hasFood={this.state.hasFood}
-      />)
+      <div>
+        <Board
+          height={this.props.height}
+          width={this.props.width}
+          pos={this.state.pos}
+          hasFood={this.state.hasFood}
+        />
+        <div className="status">
+          <div>
+            Steps: {this.state.steps}
+          </div>
+          <div>
+            {this.state.foodLeft === 0 ? 'You Won!!' : ''}
+          </div>
+        </div>
+      </div>)
   }
 }

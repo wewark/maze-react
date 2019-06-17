@@ -22,9 +22,7 @@ class App extends React.Component {
       <Game
         height={this.state.height}
         width={this.state.width}
-      >
-
-      </Game>
+      />
     )
   }
 }

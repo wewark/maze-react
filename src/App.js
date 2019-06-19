@@ -6,10 +6,11 @@ import Game from './game'
 class App extends React.Component {
   constructor(props) {
     super(props)
-    // const height = window.prompt('Height')
-    // const width = window.prompt('Width')
-    const height = 5
-    const width = 5
+    const height = window.prompt('Height')
+    const width = window.prompt('Width')
+    // For development
+    // const height = 5
+    // const width = 5
 
     this.state = {
       height: height,
@@ -20,8 +21,8 @@ class App extends React.Component {
   render() {
     return (
       <Game
-        height={this.state.height}
-        width={this.state.width}
+        height={parseInt(this.state.height)}
+        width={parseInt(this.state.width)}
       />
     )
   }

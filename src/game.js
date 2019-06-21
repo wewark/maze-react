@@ -51,8 +51,10 @@ export default class Game extends React.Component {
   }
 
   handleKeypPress = (e) => {
-    this.move(this.state.direction[e.key])
-    this.eatFood()
+    if (this.state.direction.hasOwnProperty(e.key)) {
+      this.move(this.state.direction[e.key])
+      this.eatFood()
+    }
   }
 
   // Moves the player in the given direction if the
